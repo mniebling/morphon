@@ -1,6 +1,14 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { attachDropHandlers } from '../components/drag-and-drop'
+
 
 export default function Home() {
+
+  useEffect(() => {
+    attachDropHandlers()
+  })
+
   return (
     <div className="container">
       <Head>
