@@ -1,0 +1,28 @@
+{
+  "name": "learn-starter",
+  "version": "0.1.0",
+  "private": true,
+  "main": "main/index.js",
+  "scripts": {
+    "build": "next build && next export && electron-builder --dir",
+    "start": "concurrently --kill-others \"next dev\" \"electron .\""
+  },
+  "build": {
+    "asar": true,
+    "files": [
+      "main",
+      "out"
+    ]
+  },
+  "dependencies": {
+    "next": "10.0.4",
+    "next-electron-server": "0.0.8",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "concurrently": "5.3.0",
+    "electron": "11.1.1",
+    "electron-builder": "22.9.1"
+  }
+}
