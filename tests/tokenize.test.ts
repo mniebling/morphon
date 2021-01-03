@@ -1,17 +1,21 @@
-import { parseTokenizer } from '../common/tokenize'
+import { parseTokenizer, tokenize } from '../common/tokenize'
 
 
-// describe('tokenize()', () => {
+describe('tokenize()', () => {
 
-//   xit('should create tokens', () => {
+  it('should create tokens', () => {
 
-//     const input = '123. Some Name'
-//     const tokenizer = '$number$. $name$'
-//     const expected = ['123', '. ', 'Some Name']
+    const input = '123. Some Name'
+    const tokenizer = '$number$. $name$'
+    const expected = [
+      { text: '123', type: 'capture', name: 'number' },
+      { text: '. ', type: 'text', name: '. ' },
+      { text: 'Some Name', type: 'capture', name: 'name' },
+    ]
 
-//     expect(tokenize(input, tokenizer)).toEqual(expected)
-//   })
-// })
+    expect(tokenize(input, tokenizer)).toEqual(expected)
+  })
+})
 
 describe('parseTokenizer()', () => {
 
@@ -19,8 +23,8 @@ describe('parseTokenizer()', () => {
 
     const input = 'this is a pattern'
     const expected = {
-      groups: [{ type: 'text', name: null }],
-      regExpString: 'this is a pattern',
+      groups: [{ type: 'text', name: 'this is a pattern' }],
+      regExpString: '(this is a pattern)',
     }
 
     expect(parseTokenizer(input)).toEqual(expected)
@@ -32,9 +36,9 @@ describe('parseTokenizer()', () => {
     const expected = {
       groups: [
         { type: 'capture', name: 'token' },
-        { type: 'text', name: null },
+        { type: 'text', name: 'text' },
       ],
-      regExpString: '(.+)text',
+      regExpString: '(.+)(text)',
     }
 
     expect(parseTokenizer(input)).toEqual(expected)
@@ -46,10 +50,10 @@ describe('parseTokenizer()', () => {
     const expected = {
       groups: [
         { type: 'capture', name: 'token1' },
-        { type: 'text', name: null },
+        { type: 'text', name: 'text' },
         { type: 'capture', name: 'token2' },
       ],
-      regExpString: '(.+)text(.+)',
+      regExpString: '(.+)(text)(.+)',
     }
 
     expect(parseTokenizer(input)).toEqual(expected)
@@ -60,13 +64,13 @@ describe('parseTokenizer()', () => {
     const input = 'foo $token1$ text $token2$ 2'
     const expected = {
       groups: [
-        { type: 'text', name: null },
+        { type: 'text', name: 'foo ' },
         { type: 'capture', name: 'token1' },
-        { type: 'text', name: null },
+        { type: 'text', name: ' text ' },
         { type: 'capture', name: 'token2' },
-        { type: 'text', name: null },
+        { type: 'text', name: ' 2' },
       ],
-      regExpString: 'foo (.+) text (.+) 2',
+      regExpString: '(foo )(.+)( text )(.+)( 2)',
     }
 
     expect(parseTokenizer(input)).toEqual(expected)
@@ -81,6 +85,8 @@ describe('parseTokenizer()', () => {
       ],
       regExpString: '(.+)',
     }
+
+    expect(parseTokenizer(input)).toEqual(expected)
   })
 
   it('should escape a string with special regex chars', () => {
@@ -89,9 +95,11 @@ describe('parseTokenizer()', () => {
     const expected = {
       groups: [
         { type: 'capture', name: 'token1' },
-        { type: 'text', name: null },
+        { type: 'text', name: '.|?2' },
       ],
-      regExpString: '(.+)\\.\\|\\?2',
+      regExpString: '(.+)(\\.\\|\\?2)',
     }
+
+    expect(parseTokenizer(input)).toEqual(expected)
   })
 })
