@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { FileDisplay } from '../common/FileDisplay'
+import { Token, tokenize } from '../common/tokenize'
 import css from './home.module.css'
 
 
@@ -87,8 +88,4 @@ export default function Home () {
 
     </div>
   )
-
-  function updateTokenizer (event: React.ChangeEvent<HTMLInputElement>) {
-
-  }
 }
