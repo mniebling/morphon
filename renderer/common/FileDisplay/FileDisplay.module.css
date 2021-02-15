@@ -1,0 +1,20 @@
+.fileDisplay {
+  align-items: center;
+  display: flex;
+  margin: 2px 0;
+}
+
+.index {
+  color: #999;
+  margin-right: 5px;
+  width: 40px;
+}
+
+.fileName {
+  font-family: Menlo, Courier, monospace;
+  font-size: 14px;
+}
+
+.arrow {
+  margin: 0 20px;
+}

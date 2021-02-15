@@ -1,4 +1,4 @@
-import { parseTokenizer, tokenize } from '../common/tokenize'
+import { parseTokenizer, tokenize } from '../renderer/common/tokenize'
 
 
 describe('tokenize()', () => {
