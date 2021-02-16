@@ -1,21 +1,13 @@
 .fileDisplay {
   align-items: center;
   display: flex;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 
-.index {
-  color: #999;
-  margin-right: 5px;
-  width: 40px;
-}
-
-.fileName,
-.outputFileName {
+.token {
+  background: lightblue;
+  border-radius: 4px;
   font-family: Menlo, Courier, monospace;
   font-size: 14px;
-}
-
-.arrow {
-  margin: 0 20px;
+  margin: 0 1px;
 }

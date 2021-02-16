@@ -26,7 +26,17 @@
   width: 190px;
 }
 
+.formInput {
+  padding: 4px;
+  width: 500px;
+}
+
 .filesList {
   display: flex;
   flex-direction: column;
+}
+
+.arrow {
+  color: #999;
+  margin-right: 5px;
 }

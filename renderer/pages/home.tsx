@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
+import { applyPattern } from '../common/apply-pattern'
 import { FileDisplay } from '../common/FileDisplay'
 import { Token, tokenize } from '../common/tokenize'
 import css from './home.module.css'
@@ -54,6 +55,7 @@ export default function Home () {
             <div className={ css.formGroup }>
               <label>Tokens from filename: </label>
               <input
+                className={ css.formInput }
                 onChange={ (e) => setTokenizer(e.target.value) }
                 type="text"
                 value={ tokenizer }
@@ -62,6 +64,7 @@ export default function Home () {
             <div className={ css.formGroup }>
               <label>Output filename pattern: </label>
               <input
+                className={ css.formInput }
                 onChange={ (e) => setOutputPattern(e.target.value) }
                 type="text"
                 value={ outputPattern }
@@ -73,15 +76,24 @@ export default function Home () {
 
       { files.length > 0
         ? <div className={ css.filesList }>
-            { files.map((file, i) => (
-              <FileDisplay
-                file={ file }
-                index={ i }
-                key={ i }
-                outputPattern={ outputPattern }
-                tokenizer={ tokenizer }
-              />
-            ))}
+            <table>
+              <thead></thead>
+              <tbody>
+              { files.map((file, i) => (
+                <tr key={ i }>
+                  <td>
+                    <FileDisplay index={ i } tokens={ tokenize(file.name, tokenizer) } />
+                  </td>
+                  <td>
+                    <span className={ css.arrow }>→</span>
+                  </td>
+                  <td>
+                    <FileDisplay index={ i } tokens={ applyPattern(outputPattern, tokenize(file.name, tokenizer)) } />
+                  </td>
+                </tr>
+              ))}
+              </tbody>
+            </table>
           </div>
         : null
       }

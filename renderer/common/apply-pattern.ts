@@ -1,16 +1,13 @@
-import { Token } from './tokenize'
+import { Token, tokenize } from './tokenize'
 
 
-export function applyPattern(text: string, outputPattern: string, tokens: Token[]) {
+export function applyPattern(outputPattern: string, tokens: Token[]) {
 
   let output = outputPattern
 
-  // For each capture token, find and replace $name$ with the token text
-  tokens
-    .filter(t => t.type === 'capture')
-    .forEach((token) => {
-      output = output.replace(`$${token.name}$`, token.text)
-    })
+  tokens.forEach(token => {
+    output = output.replace(`$${token.name}$`, token.text)
+  })
 
-  return output
+  return tokenize(output, outputPattern)
 }
