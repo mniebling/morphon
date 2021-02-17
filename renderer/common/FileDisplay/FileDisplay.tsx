@@ -23,7 +23,7 @@ export function FileDisplay (props: FileDisplayProps) {
           style={{
             backgroundColor: token.type === 'capture'
               ? getTokenColor(i)
-              : '#fff',
+              : '#f5f5f5',
             padding: token.type === 'capture'
               ? '2px 4px'
               : '0',

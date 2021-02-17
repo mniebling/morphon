@@ -14,7 +14,7 @@ if (isProd) {
   await app.whenReady()
 
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
     webPreferences: {
       nodeIntegration: false,

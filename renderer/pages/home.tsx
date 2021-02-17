@@ -19,10 +19,6 @@ export default function Home () {
 
       if (!event.dataTransfer) return
 
-      Array.from(event.dataTransfer.files).forEach(file => {
-        console.info(file)
-      })
-
       setFiles(Array.from(event.dataTransfer.files))
     })
 

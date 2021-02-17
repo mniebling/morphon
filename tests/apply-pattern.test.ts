@@ -13,8 +13,6 @@ describe('applyPattern()', () => {
       { type: 'capture', name: 'three', text: 'beta' },
     ]
 
-    // replaced: `check alpha two beta`
-
     expect(applyPattern(pattern, tokens)).toEqual([
       { type: 'text', name: 'check ', text: 'check ' },
       { type: 'capture', name: 'one', text: 'alpha' },
