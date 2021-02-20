@@ -2,7 +2,7 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { applyPattern } from '../common/apply-pattern'
 import { FileDisplay } from '../common/FileDisplay'
-import { Token, tokenize } from '../common/tokenize'
+import { tokenize } from '../common/tokenize'
 import css from './home.module.css'
 
 

@@ -1,4 +1,5 @@
 import { escape } from './escape'
+import { validateTokenizer } from './validate-tokenizer'
 
 export type TokenType
   = 'capture'
@@ -11,6 +12,16 @@ export interface Token {
 }
 
 export function tokenize (text: string, tokenizer: string) {
+
+  // The tokenizer often becomes invalid while the user's editing it (because they add $ chars).
+  // In this case, we want to just return a single text token so the highlight UI is temporarily turned off.
+  if (!validateTokenizer(tokenizer)) {
+    return [{
+      name: 'invalidTokenizer',
+      type: 'text' as const,
+      text,
+    }]
+  }
 
   const { regExpString, groups } = parseTokenizer(tokenizer)
   const tokenizerRegex = new RegExp(regExpString, 'g')

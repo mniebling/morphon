@@ -13,6 +13,8 @@ export const tokenColors = ['#8dd3c7','#bebada','#fb8072','#80b1d3','#fdb462','#
 
 export function FileDisplay (props: FileDisplayProps) {
 
+  console.info(props.tokens)
+
   return (
     <div className={ css.fileDisplay } key={ props.index }>
 
