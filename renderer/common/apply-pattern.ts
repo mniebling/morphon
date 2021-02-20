@@ -1,7 +1,8 @@
-import { Token, tokenize } from './tokenize'
+import { ColorizedToken, colorizeTokens } from './colorize-tokens'
+import { tokenize } from './tokenize'
 
 
-export function applyPattern(outputPattern: string, tokens: Token[]) {
+export function applyPattern(outputPattern: string, tokens: ColorizedToken[]) {
 
   let output = outputPattern
 
@@ -9,5 +10,5 @@ export function applyPattern(outputPattern: string, tokens: Token[]) {
     output = output.replace(`$${token.name}$`, token.text || '')
   })
 
-  return tokenize(output, outputPattern)
+  return colorizeTokens(tokenize(output, outputPattern), tokens)
 }

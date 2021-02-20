@@ -1,3 +1,4 @@
+import { colorizeTokens, defaultTokenColor } from './colorize-tokens'
 import { escape } from './escape'
 import { validateTokenizer } from './validate-tokenizer'
 
@@ -19,6 +20,7 @@ export function tokenize (text: string, tokenizer: string) {
     return [{
       name: 'invalidTokenizer',
       type: 'text' as const,
+      color: defaultTokenColor,
       text,
     }]
   }
@@ -43,7 +45,7 @@ export function tokenize (text: string, tokenizer: string) {
     })
   }
 
-  return tokens
+  return colorizeTokens(tokens)
 }
 
 export function parseTokenizer (tokenizer: string) {
