@@ -1,6 +1,12 @@
+import { escape } from './escape'
+
+export type TokenType
+  = 'capture'
+  | 'text'
+
 export interface Token {
-  text: string
-  type: 'capture' | 'text'
+  text?: string
+  type: TokenType
   name: string
 }
 
@@ -33,7 +39,7 @@ export function parseTokenizer (tokenizer: string) {
 
   let eating = false
   let charBeginsNewCapture = tokenizer.charAt(0) !== '$'
-  const groups: Array<{ type: 'capture' | 'text', name: string }> = []
+  const groups: Token[] = []
 
   for (const char of tokenizer) {
     // Create a new group if we're starting a new capture
@@ -76,13 +82,4 @@ export function parseTokenizer (tokenizer: string) {
     groups,
     regExpString,
   }
-}
-
-function escape (text: string) {
-
-  const needEscapeChars = ['\\', '^', '$', '.', '|', '?', '*', '+', '(', ')', '[', '{']
-
-  return needEscapeChars.reduce((accum, current) => {
-    return accum.replace(current, '\\' + current)
-  }, text)
 }
