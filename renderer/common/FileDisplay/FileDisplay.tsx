@@ -9,8 +9,6 @@ export interface FileDisplayProps {
 
 export function FileDisplay (props: FileDisplayProps) {
 
-  console.info(props.tokens)
-
   return (
     <div className={ css.fileDisplay } key={ props.index }>
 

@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import serve from 'electron-serve'
 
 
@@ -17,7 +17,7 @@ if (isProd) {
     width: 1000,
     height: 600,
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
     },
   })
 
@@ -32,4 +32,8 @@ if (isProd) {
 
 app.on('window-all-closed', () => {
   app.quit()
+})
+
+ipcMain.on('rename', (event, files) => {
+  console.log('request to rename', files)
 })

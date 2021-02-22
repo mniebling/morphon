@@ -1,3 +1,4 @@
+import { ipcRenderer } from 'electron'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import { applyPattern } from '../common/apply-pattern'
@@ -28,6 +29,10 @@ export default function Home () {
     window.addEventListener('dragover', (event) => event.preventDefault())
   })
 
+  function rename () {
+    ipcRenderer.send('rename', files.map(f => f.path))
+  }
+
   return (
     <div className={ css.container }>
       <Head>
@@ -48,24 +53,32 @@ export default function Home () {
 
       { files.length > 0
         ? <div className={ css.form }>
-            <div className={ css.formGroup }>
-              <label>Tokens from filename: </label>
-              <input
-                className={ css.formInput }
-                onChange={ (e) => setTokenizer(e.target.value) }
-                type="text"
-                value={ tokenizer }
-              />
-            </div>
-            <div className={ css.formGroup }>
-              <label>Output filename pattern: </label>
-              <input
-                className={ css.formInput }
-                onChange={ (e) => setOutputPattern(e.target.value) }
-                type="text"
-                value={ outputPattern }
-              />
-            </div>
+            <section>
+              <div className={ css.formGroup }>
+                <label>Tokens from filename: </label>
+                <input
+                  className={ css.formInput }
+                  onChange={ (e) => setTokenizer(e.target.value) }
+                  type="text"
+                  value={ tokenizer }
+                />
+              </div>
+
+              <div className={ css.formGroup }>
+                <label>Output filename pattern: </label>
+                <input
+                  className={ css.formInput }
+                  onChange={ (e) => setOutputPattern(e.target.value) }
+                  type="text"
+                  value={ outputPattern }
+                />
+              </div>
+            </section>
+
+            <button
+              className={ css.formButton }
+              onClick={ rename }
+            >Perform Rename</button>
           </div>
         : null
       }

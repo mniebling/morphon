@@ -14,6 +14,8 @@
 }
 
 .form {
+  align-items: center;
+  display: flex;
   margin-bottom: 20px;
 }
 
@@ -29,6 +31,11 @@
 .formInput {
   padding: 4px;
   width: 500px;
+}
+
+.formButton {
+  margin-left: 20px;
+  padding: 6px 8px;
 }
 
 .filesList {
